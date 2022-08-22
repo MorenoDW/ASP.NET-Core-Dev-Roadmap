@@ -117,3 +117,11 @@ Your app can also use [dependency injection in view files](https://docs.microsof
 </body>
 </html>
 ```
+
+## Filters
+
+[Filters](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/filters?view=aspnetcore-6.0) help developers encapsulate cross-cutting concerns, like exeption handling or authorization. Filters enable running custom pre- and post-processing logic for action methods, and can be configured to run at certain points within the execution pipeline for a given ewquest. Filters can be applied to controllers or actions as attributes (or can be run globally). Several filters (such as `Autorize`) are included in the framework. `[Authorize]` is the attribute that is used to create MVC authorization filters.
+```cs
+[Authorize]
+public class AccountController : Controller
+```
