@@ -43,7 +43,7 @@ ASP.NET Core MVC provides a patterns-based way to build dynamic websites that en
 ASP.NET Core MVC is built on top of [ASP:NET Core's routing](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-6.0), a powerful URL-mapping component that lets you build applications that have comprehensible and searchable URLs. This enables you to define your application's URL naming patterns that work well for search engine optimization (SEO) and for link generation, without regard for how the files on your web server are organized. You can define your routes using a convenient route template syntax that supports route value constraints, defaults and optional values.
 
 Convention-based routing enables you to globally define the URL formats that your application accepts and how each of those formats maps to a specific action method on a given controller. When an incoming request is received, the routing engine parses the URL and matches it to one of the defined URL formats, and then calls the associated controller's action method.
-```
+```cs
 routes.MapRoute(name: "Default", template: "{controller=Home}/{action=Index}/{id?}");
 ```
 *Attribute routing* enables you to specify routing information by decorating your controllers and actions with attributes that define your application's routes. This means that your route definitions are placed next to the controller and action with which they're associated.
@@ -59,3 +59,41 @@ public class ProductsController : Controller
 }
 ```
 
+# Model binding
+
+ASP.NET Core MVC [model binding](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-6.0) converts client request data (form values, route data, query string parameters, HTTP headers) into objects that the controller can handle. As a result, your controller logic doesn't have to do the work of figuring out the incoming request data; it simply has the data as parameters to its action methods.
+```cs
+public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null) { ... }
+```
+# Model validation
+
+ASP.NET Core MVC supports [validation](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-6.0) by decorating your model object with data annotaion validation attributes. The validation attributes are checked on the client side before values are posted to the server, as well as on the server before the controller action is called.
+```cs
+using System.ComponentModel.DataAnnotations;
+public class LoginViewModel
+{
+    [Required]
+    [EmailAddress]
+    public string Email { get; set; }
+
+    [Required]
+    [DataType(DataType.Password)]
+    public string Password { get; set; }
+
+    [Display(Name = "Remember me?")]
+    public bool RememberMe { get; set; }
+}
+```
+A controller action:
+```cs
+public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+{
+    if (ModelState.IsValid)
+    {
+      // work with the model
+    }
+    // At this point, something failed, redisplay form
+    return View(model);
+}
+```
+The framework handles validating request data both on the client and on the server. Validation logic specified on model types is added to the rendered views as unobstusive annotations and is enforced in the browser with [JQuery Validation](https://jqueryvalidation.org/).
