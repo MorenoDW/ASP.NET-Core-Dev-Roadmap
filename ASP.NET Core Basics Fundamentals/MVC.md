@@ -1,4 +1,4 @@
-# ASP.NET Core MVC
+# Overview ASP.NET Core MVC
 
 ASP.NET Core MVC is a rich framework for building web apps and APIs using the Model-View-Controller design pattern.
 
@@ -22,3 +22,18 @@ The Model in an MVC application represents the state of the applciation and any 
 ## View Responsibilities
 
 Views are responsible for presenting content through the user interface. They use the [Razor view engine](https://docs.microsoft.com/en-us/aspnet/core/mvc/overview?view=aspnetcore-6.0#razor-view-engine) to embed .NET code in HTML markup. There should be minimal logic within views, and any logic in them should relate to presenting content. If you find the need to perform a great deal of logic in views files in order to display data from a complex model, consider using a [View Component](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/view-components?view=aspnetcore-6.0), ViewModel or view template to simplify the view.
+
+## Controller Responsibilities
+
+Controllers are the component that handle user interaction, wotk with the model and ultimately select a view to render. In am MVC application, the view only displays information; the controller handles and responds to user input and interaction. In the MVC pattern, the controller is the initial entry point, and is responsible for selecting which model types to work with and which view to render (hence its name - it controls how the app responds to a given request).
+
+#### Note 
+Controllers shouldn't be overly complicated by too many responsibilities. To keep controller logic from becoming overly complex, push business logic out of the controller and into the domain model.
+#### Tip
+If you find that your controller actions frequently perform the same kinds of actions, move these common actions into filters.
+
+# ASP.NET Core MVC
+
+The ASP.NET Core MVC framework is a lightweight, open source, highly testable presentation framework optimized for use with ASP.NET Core.
+
+ASP.NET Core MVC provides a patterns-based way to build dynamic websites that enables a clean separation of concerns. It gives you full control over markup, supports TDD-friendly development and uses the latest web standards.
