@@ -104,7 +104,7 @@ ASP.NET Core has built-in support for [dependency injection (DI)](https://docs.m
 
 Your app can also use [dependency injection in view files](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/dependency-injection?view=aspnetcore-6.0), using the `@inject` directive:
 
-```cs
+```cshtml
 @inject SomeService ServiceName
 
 <!DOCTYPE html>
