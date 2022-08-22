@@ -125,3 +125,72 @@ Your app can also use [dependency injection in view files](https://docs.microsof
 [Authorize]
 public class AccountController : Controller
 ```
+
+## Areas
+
+[Areas](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/areas?view=aspnetcore-6.0) provide a way to partition a large ASP.NET Core MVC Web app into smaller functional groupings. An area is an MVC structure inside an application. In an MVC project, logical components like Model, Controller, and View are kept in different folders, and MVC uses naming conventions to create the relationship between these components. For a large app, it may be advantageous to partition the app into separate high level areas of functionality. For instance, an e-commerce app with multiple business units, such as checkout, billing, and search etc. Each of these units have their own logical component views, controllers, and models.
+
+## Web APIs
+
+In addition to being a great platform for building web sites, ASP.NET Core MVC has great support for building Web APIs. You can build services that reach a broad range of clients including browsers and mobile devices.
+
+The framework includes support for HTTP content-negotiation with built-in support to [format data](https://docs.microsoft.com/en-us/aspnet/core/web-api/advanced/formatting?view=aspnetcore-6.0) as JSON or XML. Write [custom formatters](https://docs.microsoft.com/en-us/aspnet/core/web-api/advanced/custom-formatters?view=aspnetcore-6.0) to add support for your own formats.
+
+Use link generation to enable support for hypermedia. Easily enable support for [cross-origin resource sharing (CORS)](https://fetch.spec.whatwg.org/) so that your Web APIs can be shared across multiple Web Applications.
+
+## Testability
+
+The framework's use of interfaces and dependency injection make it well-suited to unit testing, and the framework includes features (like a TestHost and InMemory provider for Entity Framework) that make [integration tests](https://docs.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-6.0) quick and easy as well. Learn more about [how to test controller logic](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/testing?view=aspnetcore-6.0).
+
+## Razor view engine
+
+[ASP.NET Core MVC views](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/overview?view=aspnetcore-6.0) use the [Razor view engine](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-6.0) to render views. Razor is a compact, expressive and fluid template markup language for defining views using embedded C# code. Razor is used to dynamically generate web content on the server. You can cleanly mix server code with client side content and code.
+
+```cshtml
+<ul>
+    @for (int i = 0; i < 5; i++) {
+        <li>List item @i</li>
+    }
+</ul>
+```
+Using the Razor view engine you can define [layouts](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/layout?view=aspnetcore-6.0), [partial views](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/partial?view=aspnetcore-6.0) and replaceable sections.
+
+## Strongly typed views
+
+Razor views in MVC can be strongly typed based on your model. Controllers can pass a strongly typed model to views enabling your views to have type checking and IntelliSense support.
+
+For example, the following view renders a model of type `IEnumerable<Product>`:
+```cshtml
+@model IEnumerable<Product>
+<ul>
+    @foreach (Product p in Model)
+    {
+        <li>@p.Name</li>
+    }
+</ul>
+```
+
+## Tag Helpers
+[Tag Helpers](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/intro?view=aspnetcore-6.0) enable server side code to participate in creating and rendering HTML elements in Razor files. You can use tag helpers to define custom tags (for example, `<enviroment>`) or to modify the behavior of existing tags (for example, `<label>`). Tag Helpers bind to specific elements based on the element name and its attributes. They provide the benefits of server-side rendering while still preserving an HTML editing experience.
+
+There are many built-in Tag Helpers for common tasks - such as creating forms, links, loading assets and more - and even more available in public GitHub repositories and as NuGet packages. Tag Helpers are authored in C#, and they target HTML elements based on element name, attribute name, or parent tag. For example, the built-in LinkTagHelper can be used to create a link to the `Login` action of the `AccountsController`:
+```cshtml
+<p>
+    Thank you for confirming your email.
+    Please <a asp-controller="Account" asp-action="Login">Click here to Log in</a>.
+</p>
+```
+The `EnviromentTagHelper` can be used to include different scripts in your views (for exampe, raw or minified) based on the runtime environment, such as Development, Staging or Production:
+
+```cshtml
+<environment names="Development">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</environment>
+<environment names="Staging,Production">
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.js"
+            asp-fallback-test="window.jQuery">
+    </script>
+</environment>
+```
+Tag Helpers provide an HTML-friendly development experience and a rich IntelliSense environment for creating HTML and Razor markup. Most of the built-in Tag Helpers target existing HTML elements and provide server-side attributes for the element.
