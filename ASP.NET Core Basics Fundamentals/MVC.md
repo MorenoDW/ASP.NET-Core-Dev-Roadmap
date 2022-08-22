@@ -46,3 +46,16 @@ Convention-based routing enables you to globally define the URL formats that you
 ```
 routes.MapRoute(name: "Default", template: "{controller=Home}/{action=Index}/{id?}");
 ```
+*Attribute routing* enables you to specify routing information by decorating your controllers and actions with attributes that define your application's routes. This means that your route definitions are placed next to the controller and action with which they're associated.
+```
+[Route("api/[controller]")]
+public class ProductsController : Controller
+{
+    [HttpGet("{id}")]
+    public IActionResult GetProduct(int id)
+    {
+      ...
+    }
+}
+```
+
