@@ -18,3 +18,7 @@ Both the view and the controller depend on the model. However, the model depends
 ## Model Responsibilities
 
 The Model in an MVC application represents the state of the applciation and any business logic or operations that should be performed by it. Business logic should be encapsulated in the model, along with any implementation logic for the persisting of the state of the application. Strongly-typed views tipically use ViewModel types designed to contain the data to display on that view. The controller creates and populates these ViewModel instances from the model.
+
+## View Responsibilities
+
+Views are responsible for presenting content through the user interface. They use the [Razor view engine](https://docs.microsoft.com/en-us/aspnet/core/mvc/overview?view=aspnetcore-6.0#razor-view-engine) to embed .NET code in HTML markup. There should be minimal logic within views, and any logic in them should relate to presenting content. If you find the need to perform a great deal of logic in views files in order to display data from a complex model, consider using a [View Component](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/view-components?view=aspnetcore-6.0), ViewModel or view template to simplify the view.
