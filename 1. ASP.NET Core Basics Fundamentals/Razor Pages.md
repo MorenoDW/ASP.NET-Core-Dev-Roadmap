@@ -17,3 +17,8 @@ You can still choose to use ASP.NET Core MVC to build your ASP.NET Core web appl
 The key difference between Razor Pages implementation of the MVC pattern and ASP.NET Core MVC is that Razor Pages uses the [Page Controller pattern](https://martinfowler.com/eaaCatalog/pageController.html) instead of the [Front Controller pattern](https://martinfowler.com/eaaCatalog/frontController.html).
 
 Razor Pages is the default for building server-side web applications in ASP.NET Core. Components within the underlying MVC framework still have their uses such as using controllers for building RESTful APIs.
+
+
+## Continue learning
+
+For more in depth materials follow the [link](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-6.0&tabs=visual-studio) to learn more about razor pages and complete a short tutorial on the official Microsoft Documentation
